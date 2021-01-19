@@ -36,7 +36,7 @@ cloudinary.config(
 
 #pytesseract ocr executable path
 # pytesseract.pytesseract.tesseract_cmd = r'/app/.apt/usr/bin/tesseract'
-pytesseract.pytesseract.tesseract_cmd = r'/usr/share/tesseract-ocr/4.00/tessdata'
+pytesseract.pytesseract.tesseract_cmd = r'/usr/local/share/tesseract-ocr/4.00/tessdata'
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
 class Pytesseract():
