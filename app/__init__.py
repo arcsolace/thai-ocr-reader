@@ -157,7 +157,7 @@ def index():
         if request.method == 'GET':
             image, url = Pytesseract.url_to_image(Pytesseract.check_json(request.get_json()))
             char = Pytesseract.get_bb_char(image)
-            word = Pyesseract.get_bb_word(image)
+            word = Pytesseract.get_bb_word(image)
             return jsonify({
                 'image' : image,
                 'char' : char,
@@ -172,7 +172,7 @@ def index():
 
 @app.route("/ocr_save_text", methods = ['POST'])
 def save_text():
-    return jsonify(Pytesseract.inser_doc(request.get_json()))
+    return jsonify(Pytesseract.insert_doc(request.get_json()))
 
 if __name__ == "__main__":
     app.run(host = '0.0.0.0', port = 80, debug = True)
