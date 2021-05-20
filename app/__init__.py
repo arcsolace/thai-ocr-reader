@@ -126,7 +126,7 @@ class Pytesseract():
             pic_char.append(
                     pic_url[0]['char'][i]
                     )
-        for in in range(len(word_char)):
+        for i in range(len(word_char)):
             if word_char[i] == ' ':
                 pass
             else:
