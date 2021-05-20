@@ -95,58 +95,6 @@ class Pytesseract():
             print('char Exception', e)
             return jsonify({'message' : 'error'}), 403
 
-    @classmethod
-    def get_bb_word(cls, image):
-        try:
-            hImg, wImg, _ = image.shape
-            extract = pytesseract.image_to_data(image, lang = 'tha')
-            tot = []
-            for x, b in enumerate(extract.splitlines()):
-                if x != 0:
-                    b = b.split()
-                    if len(b) == 12:
-                        let, x, y, w, h = str(b[-1]), int(b[6]), int(b[7]), int(b[8]), int(b[9])
-                        tot.append({'let' : let, 'x' : x, 'y': y, 'w' : w, 'h': h})
-            return tot
-        except Exception as e:
-            print('word Exception', e)
-            return jsonify({'message' : 'error')}, 403
-
-    @classmethod
-    def insert_doc(cls, request_json):
-        word = request_json['word']
-        secure_url = request_json['url']
-        userid = request_json['userid']
-        pic_url = list(dbres.find({'secure_url' : secure_url}))
-        pic_char = []
-        in_char = []
-        temp = []
-        word_char = list(word)
-        for i in range(len(pic_url[0]['char'])):
-            pic_char.append(
-                    pic_url[0]['char'][i]
-                    )
-        for i in range(len(word_char)):
-            if word_char[i] == ' ':
-                pass
-            else:
-                in_char.append(
-                        word_char[i]
-                        )
-        temp.append({
-            'userid' : userid,
-            'secure_url' : secure_url,
-            'char' : in_char,
-            'pic_char' : pic_char
-            })
-        dbdoc.insert({
-            'userid' : userid,
-            'secure_url' : secure_url,
-            'char' : in_char,
-            'pic_char' : pic_char
-            })
-        return {'result' : temp, 'status' : 200}
-
 @app.route('/')
 def hello():
     return 'Hello world!'
