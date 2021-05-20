@@ -96,6 +96,7 @@ class Pytesseract():
         except Exception as e:
             print('word Exception', e)
             return jsonify({'message' : 'error')}, 403
+
     @classmethod
     def insert_doc(cls, request_json):
         word = request_json['word']
