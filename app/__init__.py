@@ -79,22 +79,7 @@ class Pytesseract():
         elif image != None and url = None:
             img, url = cls.upload_image(image)
             return img, url
-    
-    @classmethod
-    def get_bb_char(cls, image):
-        try:
-            hImg, wImg, _ = image.shape
-            extract = pytesseract.image_to_boxes(image, lang = 'tha')
-            tot = []
-            for b in extract.splitlines():
-                b = b.split(' ')
-                let, x, y, w, h = str(b[0]), int(b[1]), int(b[2]), int(b[3]), int(b[4])
-                tot.append({'let' : let, 'x' : x, 'y' : y, 'w' : w, 'h' : h})
-            return tot
-        except Exception as e:
-            print('char Exception', e)
-            return jsonify({'message' : 'error'}), 403
-
+ 
     @classmethod
     def get_bb_word(cls, image):
         try:
@@ -110,7 +95,7 @@ class Pytesseract():
             return tot
         except Exception as e:
             print('word Exception', e)
-            return jsonify({'message' : 'error')}, 403
+            return jsonify({'message' : 'error'}), 403
 
     @classmethod
     def insert_doc(cls, request_json):
